@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rural Healthcare Finder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header glass">
+            <div class="max-width">
+                <div class="header-content">
+                    <div class="logo">
+                        <span class="logo-icon">❤️</span>
+                        <span class="logo-text" data-i18n="app_title">Healthcare Finder</span>
+                    </div>
+                    <nav class="nav">
+                        <a href="#" data-page="home" class="nav-link active" data-i18n="nav_home">Home</a>
+                        <a href="#" data-page="hospitals" class="nav-link" data-i18n="nav_hospitals">Hospitals</a>
+                        <a href="#" data-page="medicines" class="nav-link" data-i18n="nav_medicines">Medicines</a>
+                        <a href="#" data-page="emergency" class="nav-link" data-i18n="nav_emergency">Emergency</a>
+                        <a href="#" data-page="articles" class="nav-link" data-i18n="nav_articles">Articles</a>
+                    </nav>
+                    <div class="language-selector">
+                        <span class="globe">🌐</span>
+                        <select id="languageSelect" onchange="changeLanguage(this.value)">
+                            <option value="en">English</option>
+                            <option value="hi">हिन्दी (Hindi)</option>
+                            <option value="bn">বাংলা (Bengali)</option>
+                            <option value="ta">தமிழ் (Tamil)</option>
+                            <option value="te">తెలుగు (Telugu)</option>
+                            <option value="mr">मराठी (Marathi)</option>
+                            <option value="gu">ગુજરાતી (Gujarati)</option>
+                            <option value="kn">ಕನ್ನಡ (Kannada)</option>
+                            <option value="ml">മലയാളം (Malayalam)</option>
+                            <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+                            <option value="or">ଓଡ଼ିଆ (Odia)</option>
+                            <option value="ur">اردو (Urdu)</option>
+                            <option value="as">অসমীয়া (Assamese)</option>
+                            <option value="es">Español (Spanish)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main id="content" class="main-content">
+            <!-- Home Page -->
+            <section id="home" class="page active">
+                <div class="hero-section">
+                    <div class="hero-content">
+                        <h1 class="hero-title" data-i18n="hero_title">Your Health, Our Priority</h1>
+                        <p class="hero-subtitle" data-i18n="hero_subtitle">Find hospitals, medicines, and health information near you</p>
+                        <button class="hero-btn" onclick="navigateTo('hospitals')" data-i18n="find_hospitals">Find Hospitals</button>
+                    </div>
+                    <div class="floating-shapes">
+                        <div class="shape shape-1"></div>
+                        <div class="shape shape-2"></div>
+                    </div>
+                </div>
+
+                <!-- Feature Cards -->
+                <div class="max-width">
+                    <div class="features-grid">
+                        <div class="feature-card card-3d" onclick="navigateTo('hospitals')">
+                            <div class="card-icon">🏥</div>
+                            <h3 data-i18n="nav_hospitals">Find Hospitals</h3>
+                            <p data-i18n="find_hospitals">Locate nearest hospitals with real-time availability</p>
+                            <button class="explore-btn">Explore →</button>
+                        </div>
+                        <div class="feature-card card-3d" onclick="navigateTo('medicines')">
+                            <div class="card-icon">💊</div>
+                            <h3 data-i18n="nav_medicines">Medicine Info</h3>
+                            <p>Search medicines and get detailed information</p>
+                            <button class="explore-btn">Explore →</button>
+                        </div>
+                        <div class="feature-card card-3d" onclick="navigateTo('emergency')">
+                            <div class="card-icon">🚑</div>
+                            <h3 data-i18n="nav_emergency">Emergency</h3>
+                            <p>Quick access to emergency services</p>
+                            <button class="explore-btn">Explore →</button>
+                        </div>
+                        <div class="feature-card card-3d" onclick="navigateTo('articles')">
+                            <div class="card-icon">📚</div>
+                            <h3 data-i18n="nav_articles">Health Articles</h3>
+                            <p>Learn about health and wellness tips</p>
+                            <button class="explore-btn">Explore →</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hospitals Page -->
+            <section id="hospitals" class="page">
+                <div class="max-width">
+                    <h1 data-i18n="nav_hospitals">Hospitals</h1>
+                    <div class="search-container">
+                        <input type="text" id="hospitalSearch" placeholder="Search hospitals..." 
+                               class="search-input" onkeyup="searchHospitals(this.value)" 
+                               data-i18n-attr="placeholder" data-i18n="search_placeholder">
+                    </div>
+                    <div id="hospitalsList" class="hospitals-grid"></div>
+                </div>
+            </section>
+
+            <!-- Medicines Page -->
+            <section id="medicines" class="page">
+                <div class="max-width">
+                    <h1 data-i18n="nav_medicines">Medicines</h1>
+                    <div class="search-container">
+                        <input type="text" id="medicineSearch" placeholder="Search medicines..." 
+                               class="search-input" onkeyup="searchMedicines(this.value)"
+                               data-i18n-attr="placeholder" data-i18n="search_placeholder">
+                    </div>
+                    <div id="medicinesList" class="medicines-grid"></div>
+                    <div id="medicineDetail" class="medicine-detail hidden"></div>
+                </div>
+            </section>
+
+            <!-- Emergency Page -->
+            <section id="emergency" class="page">
+                <div class="max-width">
+                    <div class="emergency-header">
+                        <span class="emergency-icon">⚠️</span>
+                        <div>
+                            <h1 data-i18n="nav_emergency">Emergency Services</h1>
+                            <p>Quick access to emergency services in your area</p>
+                        </div>
+                    </div>
+                    <div id="emergencyList" class="emergency-grid"></div>
+                </div>
+            </section>
+
+            <!-- Articles Page -->
+            <section id="articles" class="page">
+                <div class="max-width">
+                    <h1 data-i18n="nav_articles">Health Articles</h1>
+                    <p class="page-subtitle">Health awareness and wellness information for better living</p>
+                    <div id="articlesList" class="articles-grid"></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer glass">
+            <div class="max-width">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Contact Info</h3>
+                        <div>📍 Rural Area, India</div>
+                        <div>📱 +1-800-HEALTH</div>
+                        <div>📧 info@healthcarefinder.com</div>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Follow Us</h3>
+                        <div class="social-icons">
+                            <a href="#">f</a>
+                            <a href="#">𝕏</a>
+                            <a href="#">in</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 Rural Healthcare Finder. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
